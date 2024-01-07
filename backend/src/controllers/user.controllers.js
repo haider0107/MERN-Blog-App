@@ -27,9 +27,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, password } = req.body;
 
-  if (
-    [fullName, email, username, password].some((field) => field?.trim() === "")
-  ) {
+  if ([fullName, email, password].some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
 
@@ -168,10 +166,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       secure: true,
     };
 
-    res
+    return res
       .status(200)
       .cookie("accessToken", accessToken, option)
-      .cookie("refreshToken", refreshToken)
+      .cookie("refreshToken", refreshToken, option)
       .json(
         new ApiResponse(
           200,
@@ -238,4 +236,5 @@ export {
   changeCurrentPassword,
   getCurrentUser,
   updateAccountDetails,
+  generateAccessAndRefreshToken,
 };
