@@ -45,6 +45,37 @@ const logoutUser = async () => {
   }
 };
 
-// const 
+const changeCurrentPassword = async ({ oldPassword, newPassword }) => {
+  try {
+    const res = await axios.post(`${apiRoute}/change-password`, {
+      oldPassword,
+      newPassword,
+    });
 
-export { createAccount, loginUser, getCurrentUser, logoutUser };
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const updateAccount = async ({ fullName, email }) => {
+  try {
+    const res = await axios.patch(`${apiRoute}/update-account`, {
+      fullName,
+      email,
+    });
+
+    return res.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export {
+  createAccount,
+  loginUser,
+  getCurrentUser,
+  logoutUser,
+  changeCurrentPassword,
+  updateAccount,
+};
