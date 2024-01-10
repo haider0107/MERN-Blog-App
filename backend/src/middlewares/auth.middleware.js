@@ -45,6 +45,8 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
         throw new ApiError(401, "Invalid refresh token");
       }
 
+      req.user = user;
+
       let { accessToken, refreshToken } = await generateAccessAndRefreshToken(
         user._id
       );
