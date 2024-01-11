@@ -40,15 +40,15 @@ const createArticle = asyncHandler(async (req, res) => {
 
 // Update an Article
 const updateArticle = asyncHandler(async (req, res) => {
-  const { _id, title, slug, content, status, featuredImage } = req.body;
+  const { _id, title, slug, content, status, imageURL } = req.body;
 
   if ([_id, title, slug, content].some((field) => field?.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
 
   let newFeaturedImage;
-  if (featuredImage && featuredImage.length > 0) {
-    const public_id = featuredImage.split("/").at(-1).split(".")[0];
+  if (imageURL && imageURL.length > 0) {
+    const public_id = imageURL.split("/").at(-1).split(".")[0];
 
     const isImageDeleted = await destroyOnCloudinary(public_id);
 

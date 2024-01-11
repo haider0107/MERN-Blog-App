@@ -15,13 +15,13 @@ const router = Router();
 // Create an Article and get articles
 router
   .route("/")
-  .post(verifyJWT, upload.single("featureImage"), createArticle)
+  .post(verifyJWT, upload.single("featuredImage"), createArticle)
   .get(verifyJWT, getUserArticles);
 
 // update an Article
 router
   .route("/update")
-  .patch(verifyJWT, upload.single("featureImage"), updateArticle);
+  .patch(verifyJWT, upload.single("featuredImage"), updateArticle);
 
 // Delete an article
 router.route("/delete").patch(verifyJWT, deleteArticle);
